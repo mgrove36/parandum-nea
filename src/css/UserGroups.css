@@ -1,0 +1,89 @@
+.user-groups-overlay-content {
+	width: 40%;
+	max-width: 500px;
+	height: 50%;
+	max-height: 400px;
+	align-items: center;
+}
+
+.user-groups-overlay-input-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	width: 80%;
+}
+
+.user-groups-overlay-input-container > *:first-child {
+	margin-right: 4px;
+}
+
+.user-groups-overlay-input-container > *:last-child {
+	margin-left: 4px;
+}
+
+.user-groups-overlay-input-container > input {
+	flex: 1;
+}
+
+.user-group-role-icon {
+	color: var(--text-color-tinted);
+	margin-left: 12px;
+	display: flex;
+	align-items: center;
+}
+
+.user-group-role-icon > svg {
+	height: 20px;
+}
+
+.user-groups-list {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	column-gap: 64px;
+	row-gap: 24px;
+}
+
+.user-groups-list > a {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.user-groups-list > a {
+	color: inherit;
+	text-decoration: none;
+}
+
+@media screen and (max-width: 1080px) {
+	.user-groups-overlay-content {
+		width: 50%;
+	}
+}
+@media screen and (max-width: 860px) {
+	.user-groups-overlay-content {
+		width: 70%;
+	}
+}
+@media screen and (max-width: 560px) {
+	.user-groups-overlay-input-container {
+		width: 90%;
+	}
+	.user-groups-overlay-input-container > .button {
+		margin-top: 4px;
+	}
+	.user-groups-overlay-input-container > input {
+		width: 100%;
+	}
+}
+@media screen and (max-width: 420px) {
+	.user-groups-overlay-input-container {
+		width: 100%;
+	}
+}
+@media screen and (max-width: 360px) {
+	.user-groups-overlay-input-container {
+		flex-direction: column;
+	}
+}

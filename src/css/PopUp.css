@@ -1,0 +1,45 @@
+.overlay {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 10;
+	background-color: var(--overlay-color);
+	opacity: 0.65;
+	cursor: default;
+}
+
+.popup-close-button {
+	position: absolute;
+	top: 24px;
+	right: 24px;
+}
+
+.popup-close-button > svg.MuiSvgIcon-root {
+	font-size: 32px;
+	color: var(--text-color-tinted);
+}
+
+.overlay-content {
+	position: absolute;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 20;
+	background: var(--background-color);
+	border-radius: 12px;
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+	text-align: center;
+	flex-wrap: nowrap;
+	justify-content: center;
+	padding: 32px;
+}
+
+.overlay-content > h1 {
+	margin-top: 0;
+}

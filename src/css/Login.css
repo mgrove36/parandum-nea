@@ -1,0 +1,142 @@
+.login-overlay-content {
+	width: 40%;
+	max-width: 500px;
+	height: 60%;
+	max-height: 500px;
+}
+
+.firebaseui-container form button.mdl-button, .firebaseui-container form .firebaseui-idp-button, .firebaseui-button.mdl-button {
+	border-radius: 30px;
+}
+
+.firebaseui-card-actions {
+	padding-bottom: 0 !important;
+}
+
+.firebaseui-button {
+	margin-left: 0 !important;
+}
+
+.firebaseui-form-actions > *:first-child {
+	margin-right: 2px !important;
+}
+
+.firebaseui-form-actions > *:last-child {
+	margin-left: 2px !important;
+}
+
+.firebaseui-form-actions {
+	display: flex !important;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+#firebaseui_container .mdl-card.mdl-shadow--2dp {
+	box-shadow: none;
+}
+
+.firebaseui-container, .mdl-card, .firebaseui-input, .firebaseui-subtitle, .firebaseui-title, .firebaseui-text, .firebaseui-input-invalid {
+	color: var(--text-color) !important;
+}
+
+.firebaseui-label {
+	color: var(--text-color-tinted) !important;
+}
+
+.firebaseui-textfield.mdl-textfield .firebaseui-input {
+	border-color: var(--text-color-tinted) !important;
+}
+
+.firebaseui-container {
+	background-color: var(--background-color) !important;
+}
+
+.mdl-button--raised.mdl-button--colored:hover {
+	background-color: var(--primary-color-tinted) !important;
+}
+
+.mdl-button--raised.mdl-button--colored, .firebaseui-textfield.mdl-textfield .firebaseui-label::after, .mdl-progress.mdl-progress--indeterminate > .bar1, .mdl-progress.mdl-progress__indeterminate > .bar1 {
+	background-color: var(--primary-color) !important;
+}
+
+.firebaseui-info-bar {
+	background-color: var(--overlay-color) !important;
+	border: none !important;
+}
+
+.firebaseui-link, .mdl-button--primary.mdl-button--primary {
+	color: var(--primary-color) !important;
+}
+
+.firebaseui-input-toggle-on {
+    background-image: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_white_24dp.png) !important;
+}
+
+.firebaseui-input-toggle-off {
+    background-image: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_off_white_24dp.png) !important;
+}
+
+.firebaseui-title {
+	text-align: center !important;
+}
+
+@media screen and (max-width: 1080px) {
+	.login-overlay-content {
+		width: 50%;
+	}
+}
+@media screen and (max-width: 860px) {
+	.login-overlay-content {
+		width: 80%;
+	}
+}
+@media screen and (max-width: 680px) {
+	.login-overlay-content {
+		width: 70%;
+	}
+}
+@media screen and (max-width: 420px) {
+	.firebaseui-card-content, .firebaseui-card-actions {
+		padding-left: 8px !important;
+		padding-right: 8px !important;
+	}
+}
+@media screen and (max-width: 300px) {
+	.firebaseui-card-content, .firebaseui-card-actions {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+}
+
+@media screen and (max-height: 800px) {
+	.login-overlay-content {
+		height: 70%;
+	}
+}
+@media screen and (max-height: 700px) {
+	.login-overlay-content {
+		height: 80%;
+	}
+}
+@media screen and (max-height: 570px) {
+	.login-overlay-content {
+		display: block;
+		width: 70%;
+	}
+}
+@media screen and (max-height: 420px) {
+	.login-overlay-content {
+		height: 70%;
+	}
+}
+@media screen and (max-height: 300px) {
+	.login-overlay-content {
+		height: 60%;
+	}
+}
+@media screen and (max-height: 200px) {
+	.login-overlay-content {
+		height: 50%;
+	}
+}

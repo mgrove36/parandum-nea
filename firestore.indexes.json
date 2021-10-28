@@ -1,0 +1,87 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "sets",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "owner",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "title",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "sets",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "public",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "owner",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "title",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "progress",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "uid",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "start_time",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "progress",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "duration",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "uid",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "start_time",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "progress",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "setIds",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "uid",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "start_time",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

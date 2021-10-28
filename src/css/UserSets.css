@@ -1,0 +1,22 @@
+.user-sets-list {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	column-gap: 64px;
+	row-gap: 24px;
+}
+
+.user-sets-row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.user-sets-row > * {
+	color: inherit;
+	text-decoration: none;
+}
+
+.user-sets-row > *:first-child {
+	padding: 0 12px 0 0;
+}

@@ -1,0 +1,102 @@
+.button {
+	text-decoration: none;
+	background-color: var(--primary-color);
+	color: var(--text-color);
+	padding: 10px 16px;
+	border-radius: 30px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	transition: 0.2s;
+	width: max-content;
+}
+
+nav .button {
+	margin: 4px;
+}
+
+main .button {
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+.button > span {
+	display: flex;
+}
+
+.button > span.button-children {
+	margin-bottom: -2px;
+}
+
+.button--icon-and-text > span.button-children {
+	margin-left: 5px;
+}
+
+.button:hover {
+	background-color: var(--primary-color-tinted);
+}
+
+.button.button--round {
+	padding: 8px;
+}
+
+.page-header .button.button--round {
+	padding: 10px;
+}
+
+.button.button--disabled {
+	cursor: default;
+	background-color: var(--primary-color-dark);
+	color: var(--text-color-tinted);
+}
+
+.button--loading > span {
+	opacity: 0;
+}
+
+.button--loading > img {
+	height: 24px;
+	margin: auto;
+	position: absolute;
+}
+.button.button--no-background {
+	background: none;
+	padding: 10px;
+}
+
+.button-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+}
+
+.button-container > .button {
+	margin-left: 4px;
+	margin-right: 4px;
+}
+
+.buttons--mobile {
+	display: none;
+}
+
+@media screen and (max-width: 700px) {
+	.button.button--hide-text-mobile {
+		background: none;
+		padding: 10px;
+	}
+	.button.button--hide-text-mobile .button-children {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 520px) {
+	.buttons--mobile {
+		display: flex;
+	}
+	.buttons--desktop {
+		display: none;
+	}
+}

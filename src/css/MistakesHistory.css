@@ -1,0 +1,31 @@
+.mistakes-history-container {
+	display: grid;
+	grid-column-gap: 12px;
+	grid-template-columns: repeat(2, 1fr);
+	width: min-content;
+	word-wrap: break-word;
+  	word-break: break-word;
+	width: 100%;
+}
+
+.mistakes-history-container > div {
+	margin-bottom: 4px;
+}
+
+.mistakes-history-container > div:last-child {
+	margin-bottom: 0;
+}
+
+.mistakes-history-container .Collapsible__trigger {
+	cursor: pointer;
+	display: flex;
+	margin: 0;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+}
+
+.set-select-container {
+	margin-bottom: 8px;
+}

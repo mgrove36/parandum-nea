@@ -1,0 +1,237 @@
+rules_version = '2';
+
+service cloud.firestore {
+  	match /databases/{database}/documents {
+		function isSignedIn() {
+			return request.auth != null;
+		}
+
+		function isAdmin() {
+			return request.auth.token.admin == true;
+		}
+
+		function getGroupRole(groupId) {
+			return get(/databases/$(database)/documents/users/$(request.auth.uid)/groups/$(groupId)).data.role;
+		}
+		
+		function isSetOwner(setId) {
+			return get(/databases/$(database)/documents/sets/$(setId)).data.owner == request.auth.uid;
+		}
+		
+		function isSetOwnerAndHasNoGroups(setId) {
+			let data = get(/databases/$(database)/documents/sets/$(setId)).data;
+			return data.owner == request.auth.uid && (data == null || data.groups == null || data.groups == []);
+		}
+
+		function isSetOwnerOrIsPublic(setId) {
+			let data = get(/databases/$(database)/documents/sets/$(setId)).data;
+			return data.public || data.owner == request.auth.uid;
+		}
+
+		function verifyCreateFields(fields) {
+			return request.resource.data.keys().hasAll(fields[0]) && request.resource.data.keys().hasOnly(fields[1]);
+		}
+
+		function verifyUpdateFields(fields) {
+			let affectedKeys = request.resource.data.diff(resource.data).affectedKeys();
+			return affectedKeys.hasAll([]) && affectedKeys.hasOnly(fields[1]);
+		}
+
+		function getRequestField(field, default_value) {
+			return request.resource.data.get(field, default_value);
+		}
+
+		function verifyBoolType(field) {
+			return getRequestField(field, true) is bool;
+		}
+
+		function verifyStringType(field) {
+			return getRequestField(field, "") is string;
+		}
+
+		function verifyEmptyArrayType(field) {
+			return getRequestField(field, []) == [];
+		}
+
+		match /users/{userId} {
+			function isSignedInUser() {
+				return request.auth.uid == userId;
+			}
+			
+			function verifyThemeValue() {
+				let requestField = getRequestField("theme", "default");
+				let themes = ["default", "red", "maroon", "green", "light-blue", "pink", "yellow", "orange"];
+				return requestField in themes;
+			}
+
+			function verifyFieldTypes() {
+				return verifyBoolType("coloredEdges") &&
+					verifyThemeValue();
+			}
+
+			function getPossibleFields() {
+				let requiredFields = ["theme", "coloredEdges"];
+				let optionalFields = [];
+				let allFields = requiredFields.concat(optionalFields);
+				return [requiredFields, allFields];
+			}
+
+			allow read: if isSignedIn() && isSignedInUser(); // is current user's data
+			allow update: if isSignedIn() && isSignedInUser() && verifyUpdateFields(getPossibleFields()) && verifyFieldTypes();
+
+			match /groups/{groupId} {
+				function verifyGroupFieldTypes() {
+					return getRequestField("role", "member") == "member" ||
+						getRequestField("role", "contributor") == "contributor" ||
+						getRequestField("role", "owner") == "owner";
+				}
+
+				function getPossibleGroupFields() {
+					let requiredFields = ["role"];
+					let optionalFields = [];
+					let allFields = requiredFields.concat(optionalFields);
+					return [requiredFields, allFields];
+				}
+
+				allow read, delete: if isSignedIn() && (isSignedInUser() || getGroupRole(groupId) == "owner" || isAdmin()); // is current user's data or is owner of group or is admin
+				allow create: if isSignedIn() && isSignedInUser() && (getRequestField("role", "") == "member" || (isAdmin() && verifyGroupFieldTypes())) && verifyCreateFields(getPossibleGroupFields());
+				allow update: if isSignedIn() &&
+					(getGroupRole(groupId) == "owner" || isAdmin()) &&
+					verifyGroupFieldTypes() &&
+					!(isSignedInUser()) && verifyUpdateFields(getPossibleGroupFields());
+				allow update: if isSignedIn() &&
+					isAdmin() &&
+					isSignedInUser() &&
+					getRequestField("role", "") == "owner";
+			}
+		}
+
+		match /groups/{groupId} {
+			function verifyFieldTypes() {
+				return verifyStringType("display_name");
+			}
+
+			function getPossibleFields() {
+				let nonStaticFields = ["display_name"];
+				let staticFields = ["join_code", "sets", "users"];
+
+				let allFields = staticFields.concat(nonStaticFields);
+				return [nonStaticFields, allFields];
+			}
+
+			function getPossibleUpdateFields() {
+				let fields = getPossibleFields();
+				return [[], fields[0]];
+			}
+
+			allow read: if isSignedIn() && (getGroupRole(groupId) != null || isAdmin());
+			allow update: if isSignedIn() && (getGroupRole(groupId) == "owner" || isAdmin()) && verifyUpdateFields(getPossibleUpdateFields()) && verifyFieldTypes();
+			allow delete: if isSignedIn() && (getGroupRole(groupId) == "owner" || isAdmin());
+		}
+
+
+		match /sets/{setId} {
+			function verifyPublicField() {
+				return ((resource == null || resource.data == null  || resource.data.groups == [] || resource.data.group == null) && verifyBoolType("public")) ||
+					(resource.data.groups != [] && resource.data.groups is list && getRequestField("public", true) == true);
+			}
+
+			function verifyFieldTypes() {
+				return verifyPublicField() &&
+					verifyStringType("title") &&
+					verifyStringType("owner") &&
+					verifyEmptyArrayType("groups");
+			}
+
+			function getPossibleFields() {
+				let nonStaticFields = ["public", "title"];
+				let staticFields = ["owner", "groups"];
+
+				let allFields = staticFields.concat(nonStaticFields);
+				return [nonStaticFields, allFields];
+			}
+
+			function getPossibleCreateFields() {
+				let fields = getPossibleFields();
+				return [fields[1], fields[1]];
+			}
+
+			function getPossibleUpdateFields() {
+				let fields = getPossibleFields();
+				return [[], fields[0]];
+			}
+
+			allow read: if isSignedIn() && (request.auth.uid == resource.data.owner || resource.data.public == true);
+			allow create: if isSignedIn() && request.auth.uid == request.resource.data.owner && verifyCreateFields(getPossibleCreateFields()) && verifyFieldTypes();
+			allow update: if isSignedIn() && request.auth.uid == resource.data.owner && verifyUpdateFields(getPossibleUpdateFields()) && verifyFieldTypes();
+			allow delete: if isSignedIn() && request.auth.uid == resource.data.owner && (resource == null || resource.data == null  || resource.data.groups == []);
+
+			match /vocab/{vocabId} {
+				function verifyVocabFieldTypes() {
+					return verifyStringType("term") &&
+						verifyStringType("definition");
+				}
+				
+				function getPossibleFields() {
+					let nonStaticFields = ["term", "definition"];
+					let staticFields = [];
+
+					let allFields = staticFields.concat(nonStaticFields);
+					return [nonStaticFields, allFields];
+				}
+
+				function getPossibleCreateFields() {
+					let fields = getPossibleFields();
+					return [fields[1], fields[1]];
+				}
+
+				function getPossibleUpdateFields() {
+					let fields = getPossibleFields();
+					return [[], fields[0]];
+				}
+
+				allow read: if isSignedIn() && isSetOwnerOrIsPublic(setId);
+				allow create: if isSignedIn() && isSetOwner(setId) && verifyCreateFields(getPossibleCreateFields()) && verifyVocabFieldTypes();
+				allow update: if isSignedIn() && isSetOwner(setId) && verifyUpdateFields(getPossibleUpdateFields()) && verifyVocabFieldTypes();
+				allow delete: if isSignedIn() && isSetOwnerAndHasNoGroups(setId);
+			}
+		}
+
+		match /progress/{progressId} {
+			function isProgressUser() {
+				return get(/databases/$(database)/documents/progress/$(progressId)).data.uid == request.auth.uid;
+			}
+
+			function isLanguageSwitched() {
+				return get(/databases/$(database)/documents/progress/$(progressId)).data.switch_language;
+			}
+			
+			function isNotComplete() {
+				return get(/databases/$(database)/documents/progress/$(progressId)).data.progress < get(/databases/$(database)/documents/progress/$(progressId)).data.questions.size();
+			}
+
+			allow read: if isSignedIn() && resource.data.uid == request.auth.uid;
+			allow delete: if isSignedIn() && resource.data.uid == request.auth.uid && isNotComplete();
+
+			match /terms/{vocabId} {
+				allow read: if isSignedIn() && isProgressUser() && (!(isLanguageSwitched()) || !(isNotComplete()));
+			}
+
+			match /definitions/{vocabId} {
+				allow read: if isSignedIn() && isProgressUser() && (isLanguageSwitched() || !(isNotComplete()));
+			}
+		}
+
+		match /join_codes/{joinCode} {
+			allow get: if isSignedIn();
+		}
+
+		match /completed_progress/{setIds} {
+			allow get: if isSignedIn();
+		}
+
+		match /incorrect_answers/{incorrectAnswerId} {
+			allow read: if isSignedIn();
+		}
+  	}
+}

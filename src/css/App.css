@@ -1,0 +1,430 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind&family=Playfair+Display&display=swap');
+
+html {
+  --text-color: #fafafa;
+  --text-color-tinted: #cccccc;
+  --background-color: #111111;
+  --background-color-dark: #000000;
+  --background-color-light: #222222;
+  --overlay-color: #333333;
+
+  height: 100%;
+  color: var(--text-color);
+
+  --default: #2a8c8c;
+  --default-tinted: #1d7e7e;
+  --default-dark: #0a4a4a;
+
+  --red: #b41313;
+  --red-tinted: #921515;
+  --red-dark: #660b0b;
+
+  --maroon: #a80c2e;
+  --maroon-tinted: #94102d;
+  --maroon-dark: #5c0316;
+
+  --green: #008612;
+  --green-tinted: #048b16;
+  --green-dark: #005e0c;
+
+  --light-blue: #0085ad;
+  --light-blue-tinted: #05789b;
+  --light-blue-dark: #004c63;
+
+  --pink: #a327a3;
+  --pink-tinted: #961d96;
+  --pink-dark: #521452;
+  
+  --yellow: #948500;
+  --yellow-tinted: #918305;
+  --yellow-dark: #423c00;
+  
+  --orange: #dd5e0a;
+  --orange-tinted: #c5570d;
+  --orange-dark: #8d3a03;
+}
+
+#root * {
+	transition: background-color 0.5s;
+}
+
+.background--default {
+  background-color: var(--default) !important;
+}
+.background--red {
+  background-color: var(--red) !important;
+}
+.background--maroon {
+  background-color: var(--maroon) !important;
+}
+.background--green {
+  background-color: var(--green) !important;
+}
+.background--light-blue {
+  background-color: var(--light-blue) !important;
+}
+.background--pink {
+  background-color: var(--pink) !important;
+}
+.background--yellow {
+  background-color: var(--yellow) !important;
+}
+.background--orange {
+  background-color: var(--orange) !important;
+}
+
+#root > div.default {
+  --primary-color: var(--default);
+  --primary-color-tinted: var(--default-tinted);
+  --primary-color-dark: var(--default-dark);
+}
+#root > div.red {
+  --primary-color: var(--red);
+  --primary-color-tinted: var(--red-tinted);
+  --primary-color-dark: var(--red-dark);
+}
+#root > div.maroon {
+  --primary-color: var(--maroon);
+  --primary-color-tinted: var(--maroon-tinted);
+  --primary-color-dark: var(--maroon-dark);
+}
+#root > div.green {
+  --primary-color: var(--green);
+  --primary-color-tinted: var(--green-tinted);
+  --primary-color-dark: var(--green-dark);
+}
+#root > div.light-blue {
+  --primary-color: var(--light-blue);
+  --primary-color-tinted: var(--light-blue-tinted);
+  --primary-color-dark: var(--light-blue-dark);
+}
+#root > div.pink {
+  --primary-color: var(--pink);
+  --primary-color-tinted: var(--pink-tinted);
+  --primary-color-dark: var(--pink-dark);
+}
+#root > div.yellow {
+  --primary-color: var(--yellow);
+  --primary-color-tinted: var(--yellow-tinted);
+  --primary-color-dark: var(--yellow-dark);
+}
+#root > div.orange {
+  --primary-color: var(--orange);
+  --primary-color-tinted: var(--orange-tinted);
+  --primary-color-dark: var(--orange-dark);
+}
+
+body {
+  max-width: 1080px;
+  margin: auto;
+}
+
+body, #root, #root > div, #root > div > div:first-child {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: var(--background-color);
+}
+
+main {
+  margin: 0 24px;
+  flex: 1;
+}
+
+footer {
+  margin: 24px;
+  font-size: 14px;
+  color: var(--text-color-tinted);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+html, body, footer, .firebaseui-container, .mdl-button, .mdl-textfield__input {
+	font-family: "Hind", sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", serif !important;
+}
+
+h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+
+button {
+  font: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  color: var(--primary-color);
+}
+
+button:focus-visible, a:focus-visible {
+  outline: 1px solid var(--text-color-tinted);
+}
+
+input {
+  border-top: none;
+	border-right: none;
+	border-left: none;
+	border-bottom: 2px solid var(--overlay-color);
+	background: none;
+	color: var(--text-color);
+	font: inherit;
+  min-width: 100px;
+  width: 0;
+}
+
+input:focus {
+  outline: none;
+}
+
+input[type="number"] {
+  -webkit-appearance: textfield;
+     -moz-appearance: textfield;
+          appearance: textfield;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none;
+}
+
+.page-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  margin: 0 0 16px 0;
+  column-gap: 16px;
+  row-gap: 8px;
+}
+
+.page-header > h1 {
+  margin: 0;
+	word-wrap: break-word;
+  word-break: break-word;
+}
+
+.page-header > h2 {
+  margin: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+	word-wrap: break-word;
+  word-break: break-word;
+}
+
+.page-header > .button {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.page-header--left {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.MuiCheckbox-colorSecondary.Mui-checked {
+  color: var(--primary-color) !important;
+}
+
+.MuiCheckbox-root {
+  color: var(--text-color) !important;
+}
+
+.PrivateSwitchBase-root-1 {
+  padding: 0 !important;
+  margin-right: 4px !important;
+}
+
+label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  column-gap: 2px;
+}
+
+label > span:last-child, label > a:last-child {
+	margin-bottom: -2px;
+}
+
+label > a {
+  color: inherit;
+  text-decoration: none;
+	word-wrap: break-word;
+  word-break: break-word;
+}
+
+label, p, input[type=text], main > span, main div > span {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+label .MuiIconButton-label > input {
+  z-index: -1;
+}
+
+.stat-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: baseline;
+  flex-wrap: wrap;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.stat-row > h1, .stat-row > h2, .stat-row > h3 {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.stat-row--inline {
+	justify-content: flex-start;
+  column-gap: 6px;
+}
+
+.stat-row--no-gap {
+  column-gap: 2px;
+}
+
+.page-loader-container {
+  width: 30%;
+  max-width: 150px;
+  height: min-content;
+  line-height: 0;
+  border-radius: 150px;
+  background: var(--primary-color-dark);
+  margin: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.page-loader {
+  width: calc(100% - 32px);
+  padding: 16px;
+}
+
+.cookie-notice {
+  position: fixed;
+  bottom: -1000px;
+  right: 0;
+  left: 0;
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 16px;
+  row-gap: 2px;
+  padding: 16px 24px;
+  background-color: var(--primary-color-dark);
+  text-align: center;
+}
+
+.cookie-notice > div > p {
+  margin: 8px 0 6px 0;
+}
+
+.cookie-notice a {
+  color: inherit;
+}
+
+.cookie-notice > .button.button--round {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 6px;
+}
+
+.cookie-notice > .button svg {
+  width: 48px;
+}
+
+.cookie-notice > .button:hover {
+  color: var(--text-color-tinted);
+  background-color: var(--primary-color-tinted);
+}
+
+.progress-history-container {
+	display: table;
+	table-layout: auto;
+	width: 100%;
+  margin-bottom: 10px;
+}
+
+.progress-history-container > div {
+	display: table-row;
+}
+
+.progress-history-container > div > * {
+	display: table-cell;
+	word-wrap: break-word;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	text-decoration: none;
+	color: inherit;
+  border-left: 8px solid transparent;
+  text-align: center;
+  vertical-align: top;
+}
+
+.progress-history-container > div > *:first-child {
+  border-left: 0;
+  word-break: break-word;
+  text-align: left;
+}
+
+.progress-history-container > div:first-child > * {
+	padding-top: 0;
+}
+
+.progress-history-container > div > *:first-child > svg {
+  vertical-align: top;
+  margin-left: 4px;
+}
+
+.progress-history-container .button.button--no-background {
+  padding: 0;
+  margin: 0;
+}
+
+.title-icon {
+	color: var(--text-color-tinted);
+	margin-left: 12px;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.transparent {
+  opacity: 0 !important;
+}
+
+.colored-edges {
+	z-index: -5;
+	background-color: var(--primary-color-dark);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+  opacity: 0.7;
+}
+
+
+@media screen and (max-width: 420px) {
+  .progress-history-container > div > *:nth-child(2), .progress-history-container--complete > div > *:nth-last-child(3), .progress-history-container--incomplete > div > *:nth-last-child(4) {
+    display: none;
+  }
+}

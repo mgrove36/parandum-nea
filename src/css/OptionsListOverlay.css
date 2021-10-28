@@ -1,0 +1,20 @@
+.options-list-overlay-content {
+	width: fit-content;
+	height: fit-content;
+	padding: 0;
+}
+
+.options-list-overlay-content > * {
+	border-bottom: 1px solid var(--overlay-color);
+	cursor: pointer;
+	margin: 0;
+}
+
+.options-list-overlay-content > *:not(:last-child) {
+	padding: 30px 48px;
+}
+
+.options-list-overlay-content > *:last-child {
+	border: none;
+	padding: 18px 48px;
+}
