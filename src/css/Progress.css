@@ -1,154 +1,153 @@
 .answer-input-container {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .answer-input-container > input {
-	max-width: 500px;
-	flex-grow: 1;
-	margin-right: 8px;
-	font-size: 24px;
+  max-width: 500px;
+  flex-grow: 1;
+  margin-right: 8px;
+  font-size: 24px;
 }
 
 .answer-input-container.answer-input-container--answer-entered > input {
-	caret-color: transparent;
+  caret-color: transparent;
 }
 
 .answer--correct {
-	color: #3ac535;
+  color: #3ac535;
 }
 
 .answer--incorrect {
-	color: #ff5252;
+  color: #ff5252;
 }
 
 .current-prompt {
-	font-size: 24px;
+  font-size: 24px;
 }
 
 .progress-end-incorrect-answers {
-	display: table;
-	table-layout: fixed;
-	width: 100%;
-	margin-top: 24px;
-	row-gap: 8px;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  margin-top: 24px;
+  row-gap: 8px;
 }
 
 .progress-end-incorrect-answers > div {
-	display: table-row;
+  display: table-row;
 }
 
 .progress-end-incorrect-answers > div > * {
-	display: table-cell;
-	word-wrap: break-word;
-	padding-top: 2px;
-	padding-bottom: 2px;
-  	border-left: 8px solid transparent;
+  display: table-cell;
+  word-wrap: break-word;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-left: 8px solid transparent;
 }
 
 .progress-end-incorrect-answers > div > *:first-child {
-  	border-left: 0;
+  border-left: 0;
 }
 
 .progress-end-button-container {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-	word-wrap: break-word;
-	align-items: center;
-	column-gap: 8px;
-	row-gap: 8px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  word-wrap: break-word;
+  align-items: center;
+  column-gap: 8px;
+  row-gap: 8px;
 }
 
 .progress-end-button-container > .button {
-	margin: 0;
+  margin: 0;
 }
 
 .progress-settings-overlay-content {
-	width: 80%;
-	max-width: 700px;
-	height: 70%;
-	max-height: 500px;
-	align-items: center;
+  width: 80%;
+  max-width: 700px;
+  height: 70%;
+  max-height: 500px;
+  align-items: center;
 }
 
 .progress-settings-overlay-content > .settings-themes-container {
-	justify-content: center;
-	width: 75%;
+  justify-content: center;
+  width: 75%;
 }
 
 .form-submit {
-	display: none;
+  display: none;
 }
 
 .progress-container {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .progress-stats {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-  	margin: 0 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 24px;
 }
 
 .progress-stat-row-container {
-	display: flex;
-	flex-direction: row;
-	column-gap: 48px;
-	margin-bottom: 12px;
-	flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  column-gap: 48px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
 }
 
 .progress-bar {
-	width: 100%;
-	border: 1px solid var(--overlay-color);
-	border-radius: 16px;
-	overflow: hidden;
+  width: 100%;
+  border: 1px solid var(--overlay-color);
+  border-radius: 16px;
+  overflow: hidden;
 }
 
 .progress-bar > div {
-	height: 100%;
-	background-color: var(--primary-color);
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	align-items: center;
-	justify-content: flex-start;
+  height: 100%;
+  background-color: var(--primary-color);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .progress-bar > div > p {
-	padding-left: 8px;
-	margin: 0 0 -2px 0;
+  padding-left: 8px;
+  margin: 0 0 -2px 0;
 }
 
-
 @media screen and (max-width: 660px) {
-	.progress-settings-overlay-content > .settings-themes-container {
-		width: 100%;
-	}
+  .progress-settings-overlay-content > .settings-themes-container {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 500px) {
-	.progress-settings-overlay-content {
-		width: 75%;
-	}
+  .progress-settings-overlay-content {
+    width: 75%;
+  }
 }
 
 @media screen and (max-height: 700px) {
-	.progress-settings-overlay-content {
-		height: 75%;
-	}
+  .progress-settings-overlay-content {
+    height: 75%;
+  }
 }
 
 @media screen and (max-height: 600px) {
-	.progress-settings-overlay-content {
-		justify-content: flex-start;
-	}
+  .progress-settings-overlay-content {
+    justify-content: flex-start;
+  }
 }

@@ -11,16 +11,21 @@ service cloud.firestore {
 		}
 
 		function getGroupRole(groupId) {
-			return get(/databases/$(database)/documents/users/$(request.auth.uid)/groups/$(groupId)).data.role;
+			return get(
+				/databases/$(database)/documents/users
+				/$(request.auth.uid)/groups/$(groupId)
+			).data.role;
 		}
 		
 		function isSetOwner(setId) {
-			return get(/databases/$(database)/documents/sets/$(setId)).data.owner == request.auth.uid;
+			return get(/databases/$(database)/documents/sets/$(setId))
+				.data.owner == request.auth.uid;
 		}
 		
 		function isSetOwnerAndHasNoGroups(setId) {
 			let data = get(/databases/$(database)/documents/sets/$(setId)).data;
-			return data.owner == request.auth.uid && (data == null || data.groups == null || data.groups == []);
+			return data.owner == request.auth.uid && (data == null ||
+				data.groups == null || data.groups == []);
 		}
 
 		function isSetOwnerOrIsPublic(setId) {
@@ -29,7 +34,8 @@ service cloud.firestore {
 		}
 
 		function verifyCreateFields(fields) {
-			return request.resource.data.keys().hasAll(fields[0]) && request.resource.data.keys().hasOnly(fields[1]);
+			return request.resource.data.keys().hasAll(fields[0]) &&
+				request.resource.data.keys().hasOnly(fields[1]);
 		}
 
 		function verifyUpdateFields(fields) {
@@ -60,7 +66,16 @@ service cloud.firestore {
 			
 			function verifyThemeValue() {
 				let requestField = getRequestField("theme", "default");
-				let themes = ["default", "red", "maroon", "green", "light-blue", "pink", "yellow", "orange"];
+				let themes = [
+					"default",
+					"red",
+					"maroon",
+					"green",
+					"light-blue",
+					"pink",
+					"yellow",
+					"orange"
+				];
 				return requestField in themes;
 			}
 
@@ -77,7 +92,8 @@ service cloud.firestore {
 			}
 
 			allow read: if isSignedIn() && isSignedInUser(); // is current user's data
-			allow update: if isSignedIn() && isSignedInUser() && verifyUpdateFields(getPossibleFields()) && verifyFieldTypes();
+			allow update: if isSignedIn() && isSignedInUser() &&
+				verifyUpdateFields(getPossibleFields()) && verifyFieldTypes();
 
 			match /groups/{groupId} {
 				function verifyGroupFieldTypes() {
@@ -93,12 +109,18 @@ service cloud.firestore {
 					return [requiredFields, allFields];
 				}
 
-				allow read, delete: if isSignedIn() && (isSignedInUser() || getGroupRole(groupId) == "owner" || isAdmin()); // is current user's data or is owner of group or is admin
-				allow create: if isSignedIn() && isSignedInUser() && (getRequestField("role", "") == "member" || (isAdmin() && verifyGroupFieldTypes())) && verifyCreateFields(getPossibleGroupFields());
+				allow read, delete: if isSignedIn() && (isSignedInUser() ||
+					getGroupRole(groupId) == "owner" || isAdmin());
+					// is current user's data or is owner of group or is admin
+				allow create: if isSignedIn() && isSignedInUser() &&
+					(getRequestField("role", "") == "member" ||
+					(isAdmin() && verifyGroupFieldTypes())) &&
+					verifyCreateFields(getPossibleGroupFields());
 				allow update: if isSignedIn() &&
 					(getGroupRole(groupId) == "owner" || isAdmin()) &&
 					verifyGroupFieldTypes() &&
-					!(isSignedInUser()) && verifyUpdateFields(getPossibleGroupFields());
+					!(isSignedInUser()) &&
+					verifyUpdateFields(getPossibleGroupFields());
 				allow update: if isSignedIn() &&
 					isAdmin() &&
 					isSignedInUser() &&
@@ -124,16 +146,24 @@ service cloud.firestore {
 				return [[], fields[0]];
 			}
 
-			allow read: if isSignedIn() && (getGroupRole(groupId) != null || isAdmin());
-			allow update: if isSignedIn() && (getGroupRole(groupId) == "owner" || isAdmin()) && verifyUpdateFields(getPossibleUpdateFields()) && verifyFieldTypes();
-			allow delete: if isSignedIn() && (getGroupRole(groupId) == "owner" || isAdmin());
+			allow read: if isSignedIn() && (getGroupRole(groupId) != null ||
+				isAdmin());
+			allow update: if isSignedIn() && (getGroupRole(groupId) == "owner" ||
+				isAdmin()) && verifyUpdateFields(getPossibleUpdateFields()) &&
+				verifyFieldTypes();
+			allow delete: if isSignedIn() && (getGroupRole(groupId) == "owner" ||
+				isAdmin());
 		}
 
 
 		match /sets/{setId} {
 			function verifyPublicField() {
-				return ((resource == null || resource.data == null  || resource.data.groups == [] || resource.data.group == null) && verifyBoolType("public")) ||
-					(resource.data.groups != [] && resource.data.groups is list && getRequestField("public", true) == true);
+				return ((resource == null || resource.data == null  ||
+					resource.data.groups == [] || resource.data.group == null)
+					&& verifyBoolType("public")) ||
+					(resource.data.groups != [] &&
+					resource.data.groups is list &&
+					getRequestField("public", true) == true);
 			}
 
 			function verifyFieldTypes() {
@@ -161,10 +191,21 @@ service cloud.firestore {
 				return [[], fields[0]];
 			}
 
-			allow read: if isSignedIn() && (request.auth.uid == resource.data.owner || resource.data.public == true);
-			allow create: if isSignedIn() && request.auth.uid == request.resource.data.owner && verifyCreateFields(getPossibleCreateFields()) && verifyFieldTypes();
-			allow update: if isSignedIn() && request.auth.uid == resource.data.owner && verifyUpdateFields(getPossibleUpdateFields()) && verifyFieldTypes();
-			allow delete: if isSignedIn() && request.auth.uid == resource.data.owner && (resource == null || resource.data == null  || resource.data.groups == []);
+			allow read: if isSignedIn() &&
+				(request.auth.uid == resource.data.owner ||
+				resource.data.public == true);
+			allow create: if isSignedIn() &&
+				request.auth.uid == request.resource.data.owner &&
+				verifyCreateFields(getPossibleCreateFields()) &&
+				verifyFieldTypes();
+			allow update: if isSignedIn() &&
+				request.auth.uid == resource.data.owner &&
+				verifyUpdateFields(getPossibleUpdateFields()) &&
+				verifyFieldTypes();
+			allow delete: if isSignedIn() &&
+				request.auth.uid == resource.data.owner &&
+				(resource == null || resource.data == null  ||
+				resource.data.groups == []);
 
 			match /vocab/{vocabId} {
 				function verifyVocabFieldTypes() {
@@ -191,34 +232,54 @@ service cloud.firestore {
 				}
 
 				allow read: if isSignedIn() && isSetOwnerOrIsPublic(setId);
-				allow create: if isSignedIn() && isSetOwner(setId) && verifyCreateFields(getPossibleCreateFields()) && verifyVocabFieldTypes();
-				allow update: if isSignedIn() && isSetOwner(setId) && verifyUpdateFields(getPossibleUpdateFields()) && verifyVocabFieldTypes();
+				allow create: if isSignedIn() && isSetOwner(setId) &&
+					verifyCreateFields(getPossibleCreateFields()) &&
+					verifyVocabFieldTypes();
+				allow update: if isSignedIn() && isSetOwner(setId) &&
+					verifyUpdateFields(getPossibleUpdateFields()) &&
+					verifyVocabFieldTypes();
 				allow delete: if isSignedIn() && isSetOwnerAndHasNoGroups(setId);
 			}
 		}
 
 		match /progress/{progressId} {
 			function isProgressUser() {
-				return get(/databases/$(database)/documents/progress/$(progressId)).data.uid == request.auth.uid;
+				return get(
+					/databases/$(database)/documents
+					/progress/$(progressId)
+				).data.uid == request.auth.uid;
 			}
 
 			function isLanguageSwitched() {
-				return get(/databases/$(database)/documents/progress/$(progressId)).data.switch_language;
+				return get(
+					/databases/$(database)/documents
+					/progress/$(progressId)
+				).data.switch_language;
 			}
 			
 			function isNotComplete() {
-				return get(/databases/$(database)/documents/progress/$(progressId)).data.progress < get(/databases/$(database)/documents/progress/$(progressId)).data.questions.size();
+				return get(
+					/databases/$(database)/documents
+					/progress/$(progressId)
+				).data.progress < get(
+					/databases/$(database)/documents
+					/progress/$(progressId)
+				).data.questions.size();
 			}
 
-			allow read: if isSignedIn() && resource.data.uid == request.auth.uid;
-			allow delete: if isSignedIn() && resource.data.uid == request.auth.uid && isNotComplete();
+			allow read: if isSignedIn() &&
+				resource.data.uid == request.auth.uid;
+			allow delete: if isSignedIn() &&
+				resource.data.uid == request.auth.uid && isNotComplete();
 
 			match /terms/{vocabId} {
-				allow read: if isSignedIn() && isProgressUser() && (!(isLanguageSwitched()) || !(isNotComplete()));
+				allow read: if isSignedIn() && isProgressUser() &&
+					(!(isLanguageSwitched()) || !(isNotComplete()));
 			}
 
 			match /definitions/{vocabId} {
-				allow read: if isSignedIn() && isProgressUser() && (isLanguageSwitched() || !(isNotComplete()));
+				allow read: if isSignedIn() && isProgressUser() &&
+					(isLanguageSwitched() || !(isNotComplete()));
 			}
 		}
 

@@ -1871,11 +1871,6 @@ describe("Parandum Cloud Functions", function () {
   });
 
   it("setAdmin can change other users' admin states", async () => {
-    /** NOTE
-     * Admin uid is M3JPrFRH6Fdo8XMUbF0l2zVZUCH3.
-     * This uid should be set in the function's code during testing.
-     */
-
     const setAdmin = test.wrap(cloudFunctions.setAdmin);
 
     const targetId = await admin
@@ -1897,11 +1892,6 @@ describe("Parandum Cloud Functions", function () {
   });
 
   it("setAdmin can't change current user's admin state", () => {
-    /** NOTE
-     * Admin uid is M3JPrFRH6Fdo8XMUbF0l2zVZUCH3.
-     * This uid should be set in the function's code during testing.
-     */
-
     const setAdmin = test.wrap(cloudFunctions.setAdmin);
 
     const targetId = "M3JPrFRH6Fdo8XMUbF0l2zVZUCH3";

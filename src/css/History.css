@@ -1,15 +1,15 @@
 .history-sections {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .history-sections > div {
-	flex-grow: 1;
+  flex-grow: 1;
 }
 
 .historical-user-stats-container {
-	display: flex;
-	flex-direction: row;
-	column-gap: 48px;
-	flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  column-gap: 48px;
+  flex-wrap: wrap;
 }

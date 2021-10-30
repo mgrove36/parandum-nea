@@ -1,62 +1,62 @@
 .vocab-list {
-	display: table;
-	table-layout: fixed;
-	column-gap: 10px;
-	width: 100%;
-	margin-top: 24px;
-	row-gap: 8px;
+  display: table;
+  table-layout: fixed;
+  column-gap: 10px;
+  width: 100%;
+  margin-top: 24px;
+  row-gap: 8px;
 }
 
 .vocab-list > div {
-	display: table-row;
+  display: table-row;
 }
 
 .vocab-list > div > * {
-	display: table-cell;
-	word-wrap: break-word;
-	padding-top: 2px;
-	padding-bottom: 2px;
+  display: table-cell;
+  word-wrap: break-word;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 
 .vocab-list > div.vocab-list-header > * {
-	padding-bottom: 8px;
+  padding-bottom: 8px;
 }
 
 .vocab-list > div > *:first-child {
-	border-right: 8px solid transparent;
+  border-right: 8px solid transparent;
 }
 
 .set-page-group-overlay-content {
-	width: 70%;
-	max-width: 800px;
-	height: 70%;
-	max-height: 600px;
-	align-items: center;
+  width: 70%;
+  max-width: 800px;
+  height: 70%;
+  max-height: 600px;
+  align-items: center;
 }
 
 .set-page-overlay-group-container {
-	width: 80%;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: center;
-	column-gap: 24px;
-	row-gap: 8px;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  column-gap: 24px;
+  row-gap: 8px;
 }
 
 .no-groups-message-list {
-	padding: 0 18px;
-	margin: 4px 0;
+  padding: 0 18px;
+  margin: 4px 0;
 }
 
 @media screen and (max-width: 860px) {
-	.set-page-group-overlay-content {
-		width: 75%;
-	}
+  .set-page-group-overlay-content {
+    width: 75%;
+  }
 }
 @media screen and (max-height: 700px) {
-	.set-page-group-overlay-content {
-		height: 75%;
-	}
+  .set-page-group-overlay-content {
+    height: 75%;
+  }
 }
