@@ -72,6 +72,7 @@ export default class IncorrectHistory extends Component {
         .collection("incorrect_answers")
         .where("uid", "==", this.state.user.uid)
         .orderBy("term", "asc")
+        .orderBy("definition", "asc")
         .get()
         .then(async (querySnapshot) => {
           let incorrectAnswers = [];
